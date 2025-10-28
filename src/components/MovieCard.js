@@ -1,9 +1,8 @@
-import React from "react";
 import "../styles.css";
 
 export default function MovieCard({ movie, isWatchlisted, toggleWatchlist }) {
-  const handleImageError = (e) => {
-    e.target.src = "images/default.jpg";
+  const handleImageError = (event) => {
+    event.target.src = "images/default.jpg";
   };
 
   const getRatingClass = (rating) => {
@@ -15,7 +14,7 @@ export default function MovieCard({ movie, isWatchlisted, toggleWatchlist }) {
   };
 
   return (
-    <div key={movie.id} className="movie-card">
+    <div className="movie-card">
       <img
         src={`images/${movie.image}`}
         alt={movie.title}

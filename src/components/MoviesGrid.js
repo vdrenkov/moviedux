@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import "../styles.css";
+import { useState } from "react";
+
 import MovieCard from "./MovieCard";
+
+import "../styles.css";
 
 export default function MoviesGrid({ movies, watchlist, toggleWatchlist }) {
   const [searchTerm, setSearchTerm] = useState("");
