@@ -8,42 +8,55 @@ Interactive movie explorer built with React. Search, filter, and browse movies, 
 - Genre and rating filters to quickly narrow the list.
 - Watchlist management with clear empty-state messaging.
 - Responsive card grid with graceful image fallbacks.
+- Route-safe public asset loading on nested routes.
+- SEO and social metadata (canonical URL, Open Graph, Twitter cards, WebSite JSON-LD).
+- Indexing support via `robots.txt` and `sitemap.xml`.
+- PWA metadata via `manifest.webmanifest`.
 
 ## Getting Started
 
 ```bash
 npm install
-npm start
+npm run dev
 ```
 
-The development server runs at <http://localhost:3000>. The watchlist relies on local component state; no backend is required.
+The development server runs at <http://localhost:5173> by default. The watchlist relies on local component state; no backend is required.
 
 ## Available Scripts
 
-| Command          | Description                                             |
-| ---------------- | ------------------------------------------------------- |
-| `npm start`      | Launches the development server.                        |
-| `npm run build`  | Produces an optimized production build in `build/`.     |
-| `npm test`       | Runs the CRA test runner.                               |
-| `npm run lint`\* | Suggested custom script: `eslint src --max-warnings=0`. |
-
-> \*Add to `package.json` if you want a dedicated lint script.
+| Command         | Description                                  |
+| --------------- | -------------------------------------------- |
+| `npm run dev`   | Launches the Vite development server.        |
+| `npm run build` | Produces an optimized production build in `dist/`. |
+| `npm run preview` | Serves the production build locally.       |
+| `npm run lint`  | Runs ESLint on the project.                  |
 
 ## Quality Checks
 
-- ESLint is configured with `react-app` defaults and JSX-aware parser settings (`.eslintrc`).
+- ESLint 9 flat config (`eslint.config.js`) with React hooks and refresh rules.
 - Production build is verified with `npm run build`.
 
 ## Project Structure
 
 ```
-public/          # Static assets (HTML, images, manifest)
+public/          # Static assets (images, manifest, robots, sitemap)
 src/
   components/    # UI building blocks such as MovieCard, MoviesGrid, Watchlist
   styles.css     # Shared component styling
-  App.js         # Router + page composition
-  index.js       # Entry point
+  App.jsx        # App layout + routes
+  main.jsx       # Vite entry point
+index.html       # Root HTML template + SEO metadata
+vite.config.js   # Vite configuration
 ```
+
+For Netlify deployments, `public/_redirects` is included to ensure SPA routes (e.g. `/watchlist`) resolve to `index.html`.
+
+## Tech Stack
+
+- React 19
+- React Router 7 (`react-router`)
+- Vite 7
+- ESLint 9 (flat config)
 
 ## License
 
