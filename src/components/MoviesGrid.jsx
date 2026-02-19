@@ -70,8 +70,9 @@ export default function MoviesGrid({ movies, watchlist, toggleWatchlist }) {
 
       <div className="filter-bar">
         <div className="filter-slot">
-          <label>Genre</label>
+          <label htmlFor="genre-filter">Genre</label>
           <select
+            id="genre-filter"
             className="filter-dropdown"
             value={genre}
             onChange={handleGenreChange}
@@ -85,8 +86,9 @@ export default function MoviesGrid({ movies, watchlist, toggleWatchlist }) {
         </div>
 
         <div className="filter-slot">
-          <label>Rating</label>
+          <label htmlFor="rating-filter">Rating</label>
           <select
+            id="rating-filter"
             className="filter-dropdown"
             value={rating}
             onChange={handleRatingChange}
