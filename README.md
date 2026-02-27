@@ -30,10 +30,13 @@ The development server runs at <http://localhost:5173> by default. The watchlist
 | `npm run build` | Produces an optimized production build in `dist/`. |
 | `npm run preview` | Serves the production build locally.       |
 | `npm run lint`  | Runs ESLint on the project.                  |
+| `npm run test`  | Runs Vitest in watch mode.                   |
+| `npm run test:run` | Runs Vitest once for CI/local verification. |
 
 ## Quality Checks
 
 - ESLint 9 flat config (`eslint.config.js`) with React hooks and refresh rules.
+- Vitest + React Testing Library unit tests in `src/test/unit`.
 - Production build is verified with `npm run build`.
 
 ## Project Structure
@@ -42,11 +45,15 @@ The development server runs at <http://localhost:5173> by default. The watchlist
 public/          # Static assets (images, manifest, robots, sitemap)
 src/
   components/    # UI building blocks such as MovieCard, MoviesGrid, Watchlist
+  test/
+    setup.js     # Test environment setup (@testing-library/jest-dom)
+    unit/        # Centralized unit tests
   styles.css     # Shared component styling
   App.jsx        # App layout + routes
   main.jsx       # Vite entry point
 index.html       # Root HTML template + SEO metadata
 vite.config.js   # Vite configuration
+vitest.config.js # Vitest configuration
 ```
 
 For Netlify deployments, `public/_redirects` is included to ensure SPA routes (e.g. `/watchlist`) resolve to `index.html`.
@@ -57,6 +64,7 @@ For Netlify deployments, `public/_redirects` is included to ensure SPA routes (e
 - React Router 7 (`react-router`)
 - Vite 7
 - ESLint 9 (flat config)
+- Vitest 4 + React Testing Library
 
 ## License
 
