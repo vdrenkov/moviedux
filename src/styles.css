@@ -206,8 +206,8 @@ nav a:hover {
   margin: 20px auto;
   position: relative;
   display: inline-block;
-  width: 150px; /* Width large enough to fit the label text */
-  height: 24px; /* Adjust height as needed */
+  width: 150px;
+  height: 24px;
 }
 
 .sr-only {
@@ -261,7 +261,7 @@ nav a:hover {
 }
 
 input:checked + .slider:before {
-  transform: translateX(125px); /* Move the circle to the other side */
+  transform: translateX(125px);
 }
 
 input:checked + .slider {
