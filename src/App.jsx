@@ -14,15 +14,17 @@ function App() {
     fetch("/movies.json")
       .then((response) => response.json())
       .then((data) =>
-        setMovies(data.map((movie) => ({ ...movie, rating: Number(movie.rating) })))
+        setMovies(
+          data.map((movie) => ({ ...movie, rating: Number(movie.rating) })),
+        ),
       );
   }, []);
 
   const toggleWatchlist = (movieId) => {
-    setWatchlist((prev) =>
-      prev.includes(movieId)
-        ? prev.filter((id) => id !== movieId)
-        : [...prev, movieId]
+    setWatchlist((previous) =>
+      previous.includes(movieId)
+        ? previous.filter((id) => id !== movieId)
+        : [...previous, movieId],
     );
   };
 
