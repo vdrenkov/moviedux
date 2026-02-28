@@ -6,9 +6,25 @@ import Footer from "./components/Footer";
 import MoviesGrid from "./components/MoviesGrid";
 import Watchlist from "./components/Watchlist";
 
+const WATCHLIST_STORAGE_KEY = "moviedux.watchlist";
+
+function loadStoredWatchlist() {
+  try {
+    const storedValue = globalThis.localStorage.getItem(WATCHLIST_STORAGE_KEY);
+    if (!storedValue) return [];
+
+    const parsed = JSON.parse(storedValue);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.filter((id) => Number.isInteger(id));
+  } catch {
+    return [];
+  }
+}
+
 function App() {
   const [movies, setMovies] = useState([]);
-  const [watchlist, setWatchlist] = useState([]);
+  const [watchlist, setWatchlist] = useState(loadStoredWatchlist);
 
   useEffect(() => {
     fetch("/movies.json")
@@ -19,6 +35,17 @@ function App() {
         ),
       );
   }, []);
+
+  useEffect(() => {
+    try {
+      globalThis.localStorage.setItem(
+        WATCHLIST_STORAGE_KEY,
+        JSON.stringify(watchlist),
+      );
+    } catch {
+      // Ignore localStorage write errorss (for example private browsing restrictions).
+    }
+  }, [watchlist]);
 
   const toggleWatchlist = (movieId) => {
     setWatchlist((previous) =>
