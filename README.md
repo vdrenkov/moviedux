@@ -1,12 +1,13 @@
 # Moviedux
 
-Interactive movie explorer built with React. Search, filter, and browse movies, then curate a personal watchlist that syncs across the app.
+Interactive movie explorer built with React. Search, filter, and browse movies, then curate a personal watchlist that syncs across routes and persists across reloads.
 
 ## Features
 
 - Search bar with live filtering across the loaded catalog.
 - Genre and rating filters to quickly narrow the list.
 - Watchlist management with clear empty-state messaging.
+- Watchlist persistence via browser `localStorage` (key: `moviedux.watchlist`).
 - Responsive card grid with graceful image fallbacks.
 - Route-safe public asset loading on nested routes.
 - SEO and social metadata (canonical URL, Open Graph, Twitter cards, WebSite JSON-LD).
@@ -20,7 +21,7 @@ npm install
 npm run dev
 ```
 
-The development server runs at <http://localhost:5173> by default. The watchlist relies on local component state; no backend is required.
+The development server runs at <http://localhost:5173> by default. The app uses local movie data and persists watchlist state in browser `localStorage`; no backend is required.
 
 ## Available Scripts
 
