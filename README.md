@@ -36,7 +36,7 @@ The development server runs at <http://localhost:5173> by default. The watchlist
 ## Quality Checks
 
 - ESLint 9 flat config (`eslint.config.js`) with React hooks and refresh rules.
-- Vitest + React Testing Library unit tests in `src/test/unit`.
+- Vitest + React Testing Library tests in `src/test/unit`, covering both component behavior and app-level routing/watchlist flows (via `App.test.jsx`).
 - Production build is verified with `npm run build`.
 
 ## Project Structure
@@ -47,7 +47,7 @@ src/
   components/    # UI building blocks such as MovieCard, MoviesGrid, Watchlist
   test/
     setup.js     # Test environment setup (@testing-library/jest-dom)
-    unit/        # Centralized unit tests
+    unit/        # Centralized test suite (component + app-flow coverage)
   styles.css     # Shared component styling
   App.jsx        # App layout + routes
   main.jsx       # Vite entry point
