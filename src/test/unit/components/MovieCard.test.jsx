@@ -22,6 +22,30 @@ describe("MovieCard", () => {
     expect(screen.getByText("8.6")).toHaveClass("rating-good");
   });
 
+  it("applies rating-ok class for mid ratings", () => {
+    render(
+      <MovieCard
+        movie={{ ...movie, rating: 6.4 }}
+        isWatchlisted={false}
+        toggleWatchlist={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText("6.4")).toHaveClass("rating-ok");
+  });
+
+  it("applies rating-bad class for low ratings", () => {
+    render(
+      <MovieCard
+        movie={{ ...movie, rating: 3.1 }}
+        isWatchlisted={false}
+        toggleWatchlist={vi.fn()}
+      />,
+    );
+
+    expect(screen.getByText("3.1")).toHaveClass("rating-bad");
+  });
+
   it("calls toggleWatchlist with movie id", () => {
     const toggleWatchlist = vi.fn();
 
