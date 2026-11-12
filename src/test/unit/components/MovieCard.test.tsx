@@ -12,7 +12,7 @@ const movie = {
 };
 
 describe("MovieCard", () => {
-  it("renders movie info and rating class", () => {
+  it("movieCard_highRating_rendersMovieAndScore", () => {
     render(
       <MovieCard
         movie={movie}
@@ -26,7 +26,7 @@ describe("MovieCard", () => {
     expect(screen.getByText("8.6").className).toContain("rating-good");
   });
 
-  it("applies rating-ok class for mid ratings", () => {
+  it("movieCard_middleRating_usesAmberScore", () => {
     render(
       <MovieCard
         movie={{ ...movie, rating: 6.4 }}
@@ -38,7 +38,7 @@ describe("MovieCard", () => {
     expect(screen.getByText("6.4").className).toContain("rating-ok");
   });
 
-  it("applies rating-bad class for low ratings", () => {
+  it("movieCard_lowRating_usesRedScore", () => {
     render(
       <MovieCard
         movie={{ ...movie, rating: 3.1 }}
@@ -50,7 +50,7 @@ describe("MovieCard", () => {
     expect(screen.getByText("3.1").className).toContain("rating-bad");
   });
 
-  it("calls toggleWatchlist with movie id", () => {
+  it("movieCard_selectMovie_togglesItsIdentifier", () => {
     const toggleWatchlist = vi.fn();
 
     render(
@@ -69,7 +69,7 @@ describe("MovieCard", () => {
     expect(toggleWatchlist).toHaveBeenCalledWith(7);
   });
 
-  it("falls back to default image when image fails to load", () => {
+  it("movieCard_imageLoadFails_usesFallback", () => {
     render(
       <MovieCard
         movie={movie}

@@ -8,7 +8,7 @@ describe("Footer", () => {
     vi.useRealTimers();
   });
 
-  it("renders the current year", () => {
+  it("footer_currentDate_rendersCurrentYear", () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-02-28T12:00:00Z"));
 

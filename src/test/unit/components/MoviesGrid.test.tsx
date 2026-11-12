@@ -70,6 +70,7 @@ describe("MoviesGrid", () => {
     fireEvent.click(screen.getByRole("button", { name: "Reset filters" }));
     expect(screen.getAllByRole("article")).toHaveLength(3);
     expect(screen.getByRole("status").textContent).toBe("3 movies");
+    expect(document.activeElement).toBe(screen.getByLabelText("Search movies"));
   });
 
   it.each([

@@ -7,9 +7,9 @@ export default function Watchlist({
   toggleWatchlist,
 }: MovieListProps) {
   const heading = useRef<HTMLHeadingElement>(null);
-  const watchlistedMovies = movies.filter((movie) =>
-    watchlist.includes(movie.id),
-  );
+  const watchlistedMovies = watchlist
+    .map((identifier) => movies.find((movie) => movie.id === identifier))
+    .filter((movie) => movie !== undefined);
 
   return (
     <div>

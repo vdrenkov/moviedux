@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import MovieCard from "./MovieCard";
 import type { MovieListProps } from "../movies";
 
@@ -7,6 +7,7 @@ export default function MoviesGrid({
   watchlist,
   toggleWatchlist,
 }: MovieListProps) {
+  const search = useRef<HTMLInputElement>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [genre, setGenre] = useState("All Genres");
   const [rating, setRating] = useState("All Ratings");
@@ -31,6 +32,7 @@ export default function MoviesGrid({
         <div className="filter-slot search-slot">
           <label htmlFor="movie-search">Search movies</label>
           <input
+            ref={search}
             id="movie-search"
             type="search"
             className="search-input"
@@ -83,6 +85,7 @@ export default function MoviesGrid({
           <button
             type="button"
             onClick={() => {
+              search.current?.focus();
               setSearchTerm("");
               setGenre("All Genres");
               setRating("All Ratings");

@@ -9,7 +9,7 @@ const movies = [
 ];
 
 describe("Watchlist", () => {
-  it("shows empty state when no movies are saved", () => {
+  it("watchlist_noMoviesSaved_showsEmptyState", () => {
     render(
       <Watchlist movies={movies} watchlist={[]} toggleWatchlist={vi.fn()} />,
     );
@@ -17,7 +17,7 @@ describe("Watchlist", () => {
     expect(screen.getByText("You have no saved movies yet.")).not.toBeNull();
   });
 
-  it("renders only existing watchlisted movies and ignores missing ids", () => {
+  it("watchlist_unknownIdentifiers_rendersOnlyExistingMovies", () => {
     render(
       <Watchlist
         movies={movies}
@@ -29,5 +29,20 @@ describe("Watchlist", () => {
     expect(screen.getByText("Action Hero")).not.toBeNull();
     expect(screen.queryByText("Drama Club")).toBeNull();
     expect(screen.queryByText("You have no saved movies yet.")).toBeNull();
+  });
+
+  it("watchlist_savedOrder_preservesAdditionOrder", () => {
+    render(
+      <Watchlist
+        movies={movies}
+        watchlist={[2, 1]}
+        toggleWatchlist={vi.fn()}
+      />,
+    );
+    expect(
+      screen
+        .getAllByRole("heading", { level: 2 })
+        .map((heading) => heading.textContent),
+    ).toEqual(["Drama Club", "Action Hero"]);
   });
 });

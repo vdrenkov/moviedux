@@ -38,8 +38,8 @@ export default function MovieCard({
         src={`/images/${movie.image}`}
         alt={movie.title}
         onError={handleImageError}
-        width="320"
-        height="480"
+        width="512"
+        height="512"
         loading="lazy"
         decoding="async"
       />
