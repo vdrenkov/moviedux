@@ -21,32 +21,42 @@ export default function MovieCard({
     : `Add ${movie.title} to watchlist`;
 
   const getRatingClass = (rating: number) => {
-    if (rating >= 8) return "rating-good";
+    if (rating >= 8) {
+      return "rating-good";
+    }
 
-    if (rating >= 5 && rating < 8) return "rating-ok";
+    if (rating >= 5) {
+      return "rating-ok";
+    }
 
     return "rating-bad";
   };
 
   return (
-    <div className="movie-card">
+    <article className="movie-card">
       <img
         src={`/images/${movie.image}`}
         alt={movie.title}
         onError={handleImageError}
+        width="320"
+        height="480"
+        loading="lazy"
+        decoding="async"
       />
       <div className="movie-card-info">
-        <h3 className="movie-card-title">{movie.title}</h3>
+        <h2 className="movie-card-title">{movie.title}</h2>
 
         <div>
           <span className="movie-card-genre">{movie.genre}</span>
-          <span className={`movie-card-rating ${getRatingClass(movie.rating)}`}>
+          <span
+            className={`movie-card-rating ${getRatingClass(movie.rating)}`}
+            aria-label={`Rating ${movie.rating} out of 10`}
+          >
             {movie.rating}
           </span>
         </div>
 
-        <label className="switch" htmlFor={watchlistControlId}>
-          <span className="sr-only">{watchlistLabel}</span>
+        <label className="save-control" htmlFor={watchlistControlId}>
           <input
             id={watchlistControlId}
             type="checkbox"
@@ -54,13 +64,11 @@ export default function MovieCard({
             checked={isWatchlisted}
             onChange={() => toggleWatchlist(movie.id)}
           />
-          <span className="slider">
-            <span className="slider-label" aria-hidden="true">
-              {isWatchlisted ? "In Watchlist" : "Add to watchlist"}
-            </span>
+          <span aria-hidden="true">
+            {isWatchlisted ? "In your watchlist" : "Add to watchlist"}
           </span>
         </label>
       </div>
-    </div>
+    </article>
   );
 }

@@ -1,10 +1,12 @@
+import { Link } from "react-router";
+
 export default function Header() {
   return (
-    <div className="header">
-      <img className="logo" src="/logo.png" alt="Moviedux logo" />
-      <h2 className="app-subtitle">
-        It&apos;s time for popcorn! Find your next movie here.
-      </h2>
-    </div>
+    <header className="header">
+      <Link to="/" aria-label="Moviedux home">
+        <img className="logo" src="/logo.png" alt="Moviedux" />
+      </Link>
+      <p className="app-subtitle">Good stories. Great movie nights.</p>
+    </header>
   );
 }

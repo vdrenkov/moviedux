@@ -1,4 +1,5 @@
-import { NavLink, Link, Route, Routes } from "react-router";
+import { useEffect, useRef } from "react";
+import { NavLink, Link, Route, Routes, useLocation } from "react-router";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -8,8 +9,25 @@ import { movies } from "./movies";
 import { useWatchlist } from "./useWatchlist";
 
 export default function App() {
+  const { pathname } = useLocation();
+  const previousPath = useRef(pathname);
+  const main = useRef<HTMLElement>(null);
   const { watchlist, warning, toggleWatchlist } = useWatchlist();
   const movieListProps = { movies, watchlist, toggleWatchlist };
+
+  useEffect(() => {
+    document.title =
+      pathname === "/"
+        ? "Moviedux | Movie Explorer"
+        : pathname === "/watchlist"
+          ? "Your Watchlist | Moviedux"
+          : "Page not found | Moviedux";
+
+    if (previousPath.current !== pathname) {
+      main.current?.focus();
+      previousPath.current = pathname;
+    }
+  }, [pathname]);
 
   return (
     <div className="app">
@@ -31,7 +49,7 @@ export default function App() {
             {warning}
           </p>
         )}
-        <main id="main" tabIndex={-1}>
+        <main ref={main} id="main" tabIndex={-1}>
           <Routes>
             <Route path="/" element={<MoviesGrid {...movieListProps} />} />
             <Route

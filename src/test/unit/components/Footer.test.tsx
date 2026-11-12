@@ -14,8 +14,6 @@ describe("Footer", () => {
 
     render(<Footer />);
 
-    expect(
-      screen.getByText("© 2026 Moviedux, All rights reserved."),
-    ).not.toBeNull();
+    expect(screen.getByText("© 2026 Moviedux")).not.toBeNull();
   });
 });

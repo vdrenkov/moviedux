@@ -29,6 +29,8 @@ describe("App", () => {
     expect(screen.getByText("Dark Storm")).not.toBeNull();
     expect(screen.queryByText("Whisper of Fate")).toBeNull();
     expect(window.localStorage.getItem(storageKey)).toBe("[1]");
+    expect(document.activeElement).toBe(screen.getByRole("main"));
+    expect(document.title).toBe("Your Watchlist | Moviedux");
     fireEvent.click(
       screen.getByRole("checkbox", {
         name: "Remove Dark Storm from watchlist",
@@ -36,6 +38,9 @@ describe("App", () => {
     );
     expect(screen.getByText("You have no saved movies yet.")).not.toBeNull();
     expect(window.localStorage.getItem(storageKey)).toBe("[]");
+    expect(document.activeElement).toBe(
+      screen.getByRole("heading", { name: "Your Watchlist" }),
+    );
   });
 
   it("watchlist_existingStorage_restoresSelection", () => {

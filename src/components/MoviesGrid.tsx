@@ -24,16 +24,21 @@ export default function MoviesGrid({
   return (
     <section>
       <h1 className="title">Find your next movie</h1>
-      <label htmlFor="movie-search">Search movies</label>
-      <input
-        id="movie-search"
-        type="search"
-        className="search-input"
-        placeholder="Search movies..."
-        value={searchTerm}
-        onChange={(event) => setSearchTerm(event.target.value)}
-      />
+      <p className="page-intro">
+        Explore the collection and keep the stories you want to see.
+      </p>
       <div className="filter-bar">
+        <div className="filter-slot search-slot">
+          <label htmlFor="movie-search">Search movies</label>
+          <input
+            id="movie-search"
+            type="search"
+            className="search-input"
+            placeholder="Search movies..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
         <div className="filter-slot">
           <label htmlFor="genre-filter">Genre</label>
           <select
