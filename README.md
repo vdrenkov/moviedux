@@ -8,7 +8,6 @@ Responsive movie explorer built with React, TypeScript and React Router.
 
 - Search a curated collection and combine genre and rating filters.
 - Save movies to a watchlist that persists across reloads and updates across tabs.
-- Recover from unreadable or unavailable browser storage.
 - Use labelled controls, keyboard navigation and responsive layouts.
 
 ## Setup
@@ -22,6 +21,13 @@ npm run dev
 
 Vite serves the application at <http://localhost:5173>. No API keys or backend are required.
 
+To preview a production build:
+
+```bash
+npm run build
+npm run preview
+```
+
 ## Verification
 
 ```bash
@@ -30,22 +36,13 @@ npm audit --audit-level=low
 ```
 
 The check runs formatting, a strict TypeScript build and Vitest unit/component tests.
-Use `npm run format` to format files and `npm run preview` to preview the production build.
-CI runs the same checks on pushes and pull requests.
+CI runs the same checks and audit on pushes and pull requests. Use `npm run format` to format files.
 
 ## Limitations
 
-The bundled catalog contains 20 fictional movies and illustrative ratings; it is not a live movie
-database or streaming service. Watchlists stay in this browser and are not linked to an account.
-Clearing site data removes saved movies. If storage is blocked or full, changes remain available
-only for the current visit and the application displays a notice.
-
-## Deployment
-
-In Netlify, use production branch `master`, an empty base directory, build command `npm run build`,
-publish directory `dist` and `NPM_VERSION=12.2.2`. Node is pinned in `.nvmrc`. No application
-environment variables are required. The included redirect serves client routes such as `/watchlist`;
-the headers file sets security headers and caches hashed build assets.
+The catalog contains 20 fictional movies and illustrative ratings. Watchlists stay in this browser,
+without accounts or cloud sync. Clearing site data removes saved movies. If storage is blocked or
+full, the application displays a notice and keeps changes only for the current visit.
 
 ## Acknowledgments
 
