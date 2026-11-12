@@ -1,72 +1,54 @@
 # Moviedux
 
-Interactive movie explorer built with React. Search, filter, and browse movies, then curate a personal watchlist that syncs across routes and persists across reloads.
+Responsive movie explorer built with React, TypeScript and React Router.
+
+[Open Moviedux](https://moviedux-vdrenkov.netlify.app/)
 
 ## Features
 
-- Search bar with live filtering across the loaded catalog.
-- Genre and rating filters to quickly narrow the list.
-- Watchlist management with clear empty-state messaging.
-- Watchlist persistence via browser `localStorage` (key: `moviedux.watchlist`).
-- Responsive card grid with graceful image fallbacks.
-- Route-safe public asset loading on nested routes.
-- SEO and social metadata (canonical URL, Open Graph, Twitter cards, WebSite JSON-LD).
-- Indexing support via `robots.txt` and `sitemap.xml`.
-- PWA metadata via `manifest.webmanifest`.
+- Search a curated collection and combine genre and rating filters.
+- Save movies to a watchlist that persists across reloads and updates across tabs.
+- Recover from unreadable or unavailable browser storage.
+- Use labelled controls, keyboard navigation and responsive layouts.
 
-## Getting Started
+## Setup
+
+Use Node 26.13.1 and npm 12.2.2.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-The development server runs at <http://localhost:5173> by default. The app uses local movie data and persists watchlist state in browser `localStorage`; no backend is required.
+Vite serves the application at <http://localhost:5173>. No API keys or backend are required.
 
-## Available Scripts
+## Verification
 
-| Command         | Description                                  |
-| --------------- | -------------------------------------------- |
-| `npm run dev`   | Launches the Vite development server.        |
-| `npm run build` | Produces an optimized production build in `dist/`. |
-| `npm run preview` | Serves the production build locally.       |
-| `npm run lint`  | Runs ESLint on the project.                  |
-| `npm run test`  | Runs Vitest in watch mode.                   |
-| `npm run test:run` | Runs Vitest once for CI/local verification. |
-
-## Quality Checks
-
-- ESLint 9 flat config (`eslint.config.js`) with React hooks and refresh rules.
-- Vitest + React Testing Library tests in `src/test/unit`, covering both component behavior and app-level routing/watchlist flows (via `App.test.jsx`).
-- Production build is verified with `npm run build`.
-
-## Project Structure
-
-```
-public/          # Static assets (images, manifest, robots, sitemap)
-src/
-  components/    # UI building blocks such as MovieCard, MoviesGrid, Watchlist
-  test/
-    setup.js     # Test environment setup (@testing-library/jest-dom)
-    unit/        # Centralized test suite (component + app-flow coverage)
-  styles.css     # Shared component styling
-  App.jsx        # App layout + routes
-  main.jsx       # Vite entry point
-index.html       # Root HTML template + SEO metadata
-vite.config.js   # Vite configuration
-vitest.config.js # Vitest configuration
+```bash
+npm run check
+npm audit --audit-level=low
 ```
 
-For Netlify deployments, `public/_redirects` is included to ensure SPA routes (e.g. `/watchlist`) resolve to `index.html`.
+The check runs formatting, a strict TypeScript build and Vitest unit/component tests.
+Use `npm run format` to format files and `npm run preview` to preview the production build.
+CI runs the same checks on pushes and pull requests.
 
-## Tech Stack
+## Limitations
 
-- React 19
-- React Router 7 (`react-router`)
-- Vite 7
-- ESLint 9 (flat config)
-- Vitest 4 + React Testing Library
+The bundled catalog contains 20 fictional movies and illustrative ratings; it is not a live movie
+database or streaming service. Watchlists stay in this browser and are not linked to an account.
+Clearing site data removes saved movies. If storage is blocked or full, changes remain available
+only for the current visit and the application displays a notice.
 
-## License
+## Deployment
 
-This project exists solely for personal use, portfolio presentation, and skill showcasing. Original course materials and inspiration come from the Udemy course **“React 18/19 Course 2025 - Learn JS the Fast Way” by Jannick Leismann** — credit to the instructor and platform for the foundational content.
+In Netlify, use production branch `master`, an empty base directory, build command `npm run build`,
+publish directory `dist` and `NPM_VERSION=12.2.2`. Node is pinned in `.nvmrc`. No application
+environment variables are required. The included redirect serves client routes such as `/watchlist`;
+the headers file sets security headers and caches hashed build assets.
+
+## Acknowledgments
+
+Based on Jannick Leismann’s Udemy course “React 18/19 Course 2025 - Learn JS the Fast Way”,
+including its supplied movie artwork and branding. This is a personal portfolio project and is not
+for redistribution.
