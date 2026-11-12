@@ -1,15 +1,26 @@
-import "../styles.css";
+import type { SyntheticEvent } from "react";
+import type { Movie } from "../movies";
 
-export default function MovieCard({ movie, isWatchlisted, toggleWatchlist }) {
-  const handleImageError = (event) => {
-    event.target.src = "/images/default.jpg";
+export default function MovieCard({
+  movie,
+  isWatchlisted,
+  toggleWatchlist,
+}: {
+  movie: Movie;
+  isWatchlisted: boolean;
+  toggleWatchlist: (movieId: number) => void;
+}) {
+  const handleImageError = (event: SyntheticEvent<HTMLImageElement>) => {
+    if (!event.currentTarget.src.endsWith("/images/default.jpg")) {
+      event.currentTarget.src = "/images/default.jpg";
+    }
   };
   const watchlistControlId = `watchlist-${movie.id}`;
   const watchlistLabel = isWatchlisted
     ? `Remove ${movie.title} from watchlist`
     : `Add ${movie.title} to watchlist`;
 
-  const getRatingClass = (rating) => {
+  const getRatingClass = (rating: number) => {
     if (rating >= 8) return "rating-good";
 
     if (rating >= 5 && rating < 8) return "rating-ok";

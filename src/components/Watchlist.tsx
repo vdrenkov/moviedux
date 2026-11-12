@@ -1,16 +1,13 @@
-import { useMemo } from "react";
-
 import MovieCard from "./MovieCard";
+import type { MovieListProps } from "../movies";
 
-import "../styles.css";
-
-export default function Watchlist({ movies, watchlist, toggleWatchlist }) {
-  const watchlistedMovies = useMemo(
-    () =>
-      watchlist
-        .map((id) => movies.find((movie) => movie.id === id))
-        .filter(Boolean),
-    [movies, watchlist]
+export default function Watchlist({
+  movies,
+  watchlist,
+  toggleWatchlist,
+}: MovieListProps) {
+  const watchlistedMovies = movies.filter((movie) =>
+    watchlist.includes(movie.id),
   );
 
   return (

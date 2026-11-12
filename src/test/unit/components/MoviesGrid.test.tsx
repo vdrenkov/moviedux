@@ -15,9 +15,9 @@ describe("MoviesGrid", () => {
       <MoviesGrid movies={movies} watchlist={[]} toggleWatchlist={vi.fn()} />,
     );
 
-    expect(screen.getByText("Action Hero")).toBeInTheDocument();
-    expect(screen.getByText("Drama Club")).toBeInTheDocument();
-    expect(screen.getByText("Nightmare")).toBeInTheDocument();
+    expect(screen.getByText("Action Hero")).not.toBeNull();
+    expect(screen.getByText("Drama Club")).not.toBeNull();
+    expect(screen.getByText("Nightmare")).not.toBeNull();
   });
 
   it("filters movies by search term", () => {
@@ -29,9 +29,9 @@ describe("MoviesGrid", () => {
       target: { value: "drama" },
     });
 
-    expect(screen.queryByText("Action Hero")).not.toBeInTheDocument();
-    expect(screen.getByText("Drama Club")).toBeInTheDocument();
-    expect(screen.queryByText("Nightmare")).not.toBeInTheDocument();
+    expect(screen.queryByText("Action Hero")).toBeNull();
+    expect(screen.getByText("Drama Club")).not.toBeNull();
+    expect(screen.queryByText("Nightmare")).toBeNull();
   });
 
   it("filters by genre and rating", () => {
@@ -40,14 +40,14 @@ describe("MoviesGrid", () => {
     );
 
     fireEvent.change(screen.getByLabelText("Genre"), {
-      target: { value: "Action" },
+      target: { value: "action" },
     });
     fireEvent.change(screen.getByLabelText("Rating"), {
       target: { value: "Good" },
     });
 
-    expect(screen.getByText("Action Hero")).toBeInTheDocument();
-    expect(screen.queryByText("Drama Club")).not.toBeInTheDocument();
-    expect(screen.queryByText("Nightmare")).not.toBeInTheDocument();
+    expect(screen.getByText("Action Hero")).not.toBeNull();
+    expect(screen.queryByText("Drama Club")).toBeNull();
+    expect(screen.queryByText("Nightmare")).toBeNull();
   });
 });

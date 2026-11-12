@@ -14,12 +14,16 @@ const movie = {
 describe("MovieCard", () => {
   it("renders movie info and rating class", () => {
     render(
-      <MovieCard movie={movie} isWatchlisted={false} toggleWatchlist={vi.fn()} />,
+      <MovieCard
+        movie={movie}
+        isWatchlisted={false}
+        toggleWatchlist={vi.fn()}
+      />,
     );
 
-    expect(screen.getByText("Interstellar")).toBeInTheDocument();
-    expect(screen.getByText("Fantasy")).toBeInTheDocument();
-    expect(screen.getByText("8.6")).toHaveClass("rating-good");
+    expect(screen.getByText("Interstellar")).not.toBeNull();
+    expect(screen.getByText("Fantasy")).not.toBeNull();
+    expect(screen.getByText("8.6").className).toContain("rating-good");
   });
 
   it("applies rating-ok class for mid ratings", () => {
@@ -31,7 +35,7 @@ describe("MovieCard", () => {
       />,
     );
 
-    expect(screen.getByText("6.4")).toHaveClass("rating-ok");
+    expect(screen.getByText("6.4").className).toContain("rating-ok");
   });
 
   it("applies rating-bad class for low ratings", () => {
@@ -43,7 +47,7 @@ describe("MovieCard", () => {
       />,
     );
 
-    expect(screen.getByText("3.1")).toHaveClass("rating-bad");
+    expect(screen.getByText("3.1").className).toContain("rating-bad");
   });
 
   it("calls toggleWatchlist with movie id", () => {
@@ -67,7 +71,11 @@ describe("MovieCard", () => {
 
   it("falls back to default image when image fails to load", () => {
     render(
-      <MovieCard movie={movie} isWatchlisted={false} toggleWatchlist={vi.fn()} />,
+      <MovieCard
+        movie={movie}
+        isWatchlisted={false}
+        toggleWatchlist={vi.fn()}
+      />,
     );
 
     const image = screen.getByRole("img", { name: "Interstellar" });

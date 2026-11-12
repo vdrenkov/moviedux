@@ -13,14 +13,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "format": "prettier --write .",
     "preview": "vite preview",
     "test": "vitest run",
     "check": "prettier --check . && npm run build && npm test"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",

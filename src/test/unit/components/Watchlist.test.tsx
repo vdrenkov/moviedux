@@ -10,18 +10,24 @@ const movies = [
 
 describe("Watchlist", () => {
   it("shows empty state when no movies are saved", () => {
-    render(<Watchlist movies={movies} watchlist={[]} toggleWatchlist={vi.fn()} />);
+    render(
+      <Watchlist movies={movies} watchlist={[]} toggleWatchlist={vi.fn()} />,
+    );
 
-    expect(screen.getByText("You have no saved movies yet.")).toBeInTheDocument();
+    expect(screen.getByText("You have no saved movies yet.")).not.toBeNull();
   });
 
   it("renders only existing watchlisted movies and ignores missing ids", () => {
     render(
-      <Watchlist movies={movies} watchlist={[1, 999]} toggleWatchlist={vi.fn()} />,
+      <Watchlist
+        movies={movies}
+        watchlist={[1, 999]}
+        toggleWatchlist={vi.fn()}
+      />,
     );
 
-    expect(screen.getByText("Action Hero")).toBeInTheDocument();
-    expect(screen.queryByText("Drama Club")).not.toBeInTheDocument();
-    expect(screen.queryByText("You have no saved movies yet.")).not.toBeInTheDocument();
+    expect(screen.getByText("Action Hero")).not.toBeNull();
+    expect(screen.queryByText("Drama Club")).toBeNull();
+    expect(screen.queryByText("You have no saved movies yet.")).toBeNull();
   });
 });
